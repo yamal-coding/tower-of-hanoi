@@ -5,7 +5,7 @@ import kotlin.math.pow
 class Game(
     numOfDisks: Int
 ) {
-    private val rods = mapOf(
+    private val stacks = mapOf(
         Stack.FIRST to java.util.Stack<Int>(),
         Stack.MIDDLE to java.util.Stack<Int>(),
         Stack.LAST to java.util.Stack<Int>()
@@ -22,7 +22,7 @@ class Game(
         }
 
         for (disk in numOfDisks downTo 1) {
-            rods[Stack.FIRST]?.push(disk)
+            stacks[Stack.FIRST]?.push(disk)
         }
     }
 
@@ -33,7 +33,7 @@ class Game(
     fun lastStack(): List<Int> = stacks(Stack.LAST)
 
     fun isRodEmpty(stack: Stack): Boolean =
-        rods[stack]?.isEmpty() == true
+        stacks(stack).isEmpty()
 
     fun canMoveDisk(from: Stack, to: Stack): Boolean =
         when {
@@ -56,7 +56,7 @@ class Game(
     }
 
     fun hasEnded(): Boolean =
-        rods[Stack.FIRST]?.isEmpty() == true && rods[Stack.MIDDLE]?.isEmpty() == true
+        stacks(Stack.FIRST).isEmpty() && stacks(Stack.MIDDLE).isEmpty()
 
-    private fun stacks(stack: Stack): java.util.Stack<Int> = rods[stack]!!
+    private fun stacks(stack: Stack): java.util.Stack<Int> = stacks[stack]!!
 }

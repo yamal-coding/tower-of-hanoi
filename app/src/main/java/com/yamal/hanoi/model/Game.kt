@@ -32,9 +32,6 @@ class Game(
 
     fun lastStack(): List<Int> = stacks(Stack.LAST)
 
-    fun isRodEmpty(stack: Stack): Boolean =
-        stacks(stack).isEmpty()
-
     fun canMoveDisk(from: Stack, to: Stack): Boolean =
         when {
             stacks(from).isEmpty() ||
